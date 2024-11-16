@@ -33,9 +33,11 @@ public class Horse extends ChessPiece {
             //клетки, через которые будет проходить фигура
             int line1 = line + Integer.signum(deltaLine);
             int line2 = line + 2 * Integer.signum(deltaLine);
+            int column1 = column + Integer.signum(deltaColumn);
 
             //проверка, что на этих клетках нет других фигур
-            if (board.board[line1][column] != null || board.board[line2][column] != null) {
+            if ((board.board[line1][column] != null || board.board[line2][column] != null) &&
+                    (board.board[line][column1] != null || board.board[line1][column1] != null)) {
                 return false;
             }
 

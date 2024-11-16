@@ -49,15 +49,14 @@ public class King extends ChessPiece {
 
     public boolean isUnderAttack (ChessBoard board, int line, int column) {
 
+        String kingColor = this.getColor();
+        String opponentColor = kingColor.equals("Black") ? "White" : "Black";
+
         for (int i = 0; i < 8; i++) {  //циклы, в которых перебираем все ряды и столбцы
             for (int j = 0; j < 8; j++) {
-
-                if (board.board[i][j] == null) { //если клетка пустая - король в безопасности
-                    return false;
-                }
-                    //проверяем, что в клетке фигура врага и она моет переместится на клетку короля
-                if (!board.board[line][column].getColor().equals(board.board[i][j].getColor())) {
-                    if (board.board[i][j].canMoveToPosition(board, i, j, line, column)) {
+                //проверяем, что в клетке фигура врага
+                if (board.board[i][j] != null && board.board[i][j].getColor().equals(opponentColor)) {
+                    if (board.board[i][j].canMoveToPosition(board, i, j, line, column)) {// и она может переместиться на клетку короля
                         return true;
                     }
                 }
